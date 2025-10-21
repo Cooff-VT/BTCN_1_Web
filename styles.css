@@ -245,6 +245,21 @@ body{
   margin-bottom: 0;
 }
 
+.grid-placeholder{
+  min-height: 120px;
+  border-radius:10px;
+  border:2px dashed rgba(0,0,0,0.08);
+  background:#f7fbff;
+}
+/* Định dạng cho clone (item đang kéo) */
+.dragging-clone{
+  position:absolute;
+  z-index:3000;
+  pointer-events:none;
+  transform:scale(1.04);
+  box-shadow:0 18px 30px rgba(0,0,0,0.22);
+}
+
 @media(max-width:576px){
   #page-wrap{ margin:8px; }
   /* YÊU CẦU 1: Thay đổi bố cục main */
