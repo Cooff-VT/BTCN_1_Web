@@ -99,3 +99,22 @@ body{
   justify-content: center;
   gap: 40px;
 }
+.copyright {
+  color: var(--accent);
+}
+.footer-menu{ list-style:none; display:flex; gap:10px; margin:0; padding:0; }
+.footer-menu .nav-item{
+  padding:4px 8px;
+  border-radius:6px;
+  cursor:pointer;
+  transition: all .14s ease;
+  color: var(--accent);
+  text-decoration: underline;
+}
+.footer-menu .nav-item:hover, .footer-menu .nav-item.active{
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  transform: none;
+  font-weight:700;
+}
