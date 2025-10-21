@@ -59,4 +59,38 @@ $(function(){
     });
   })();
   /* --- Hết Yêu cầu 9 --- */
+
+  /* YÊU CẦU 10: Logic Popover */
+  $('#btnSettings').on('click', function(e) {
+    e.stopPropagation();
+    $('#settingsPopover').toggle();
+  });
+  $(document).on('click', function(e) {
+    if (!$(e.target).closest('.settings-container').length && !$(e.target).is('#btnSettings')) {
+        $('#settingsPopover').hide();
+    }
+  });
+
+   /* YÊU CẦU 10: Hàm áp dụng Style (cho cả SampleText & Highlight) */
+  function applyHighlightStyles(){
+    var textColor = $('#textColor').val();
+    var bgColor = $('#bgColor').val();
+    var isBold = $('#cbBold').is(':checked');
+    var isItalic = $('#cbItalic').is(':checked');
+    var isUnderline = $('#cbUnderline').is(':checked');
+
+    var styles = {
+      color: textColor,
+      background: bgColor,
+      fontWeight: isBold ? 'bold' : 'normal',
+      fontStyle: isItalic ? 'italic' : 'normal',
+      textDecoration: isUnderline ? 'underline' : 'none'
+    };
+    
+    // Áp dụng style cho text đã highlight (Yêu cầu 11)
+    $orig.find('.highlighted').css(styles);
+    // Áp dụng style cho nút SampleText (Yêu cầu 10)
+    $('#btnSample').css(styles);
+  }
 });
+  
