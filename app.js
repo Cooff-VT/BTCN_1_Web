@@ -178,5 +178,78 @@ $(function(){
         dragging.$item.show();
         dragging = null;
       });
+
+      $(document).on('mousemove.gr', function(ev){
+        if (!dragging) return;
+        var $item = dragging.$item;
+        
+        dragging.$clone.css({ left: ev.pageX - ($item.outerWidth()/2), top: ev.pageY - ($item.outerHeight()/2) });
+
+        var placed = false;
+        var newTarget = null;
+        
+        $grid.children().not($item).not(dragging.$placeholder).each(function(){
+          var $n = $(this);
+          var midX = $n.offset().left + $n.outerWidth()/2;
+          var midY = $n.offset().top + $n.outerHeight()/2;
+          
+          if(ev.pageY < midY || (Math.abs(ev.pageY-midY) < 10 && ev.pageX < midX)){
+             newTarget = this;
+             placed = true; 
+             return false;
+          }
+        });
+        
+        var newInsertionTarget = placed ? newTarget : null;
+        var currentTarget = dragging.$placeholder.next()[0] || null;
+
+        if (newInsertionTarget === currentTarget) {
+            return; 
+        }
+
+        // Bắt đầu FLIP
+        var $itemsToAnimate = $grid.children('.grid-item').not($item);
+        var firstRects = new Map();
+        $itemsToAnimate.each(function(){
+            firstRects.set(this, this.getBoundingClientRect());
+        });
+
+        $itemsToAnimate.css('transition', 'none'); 
+        if (newInsertionTarget) {
+            dragging.$placeholder.insertBefore(newInsertionTarget);
+        } else {
+            $grid.append(dragging.$placeholder);
+        }
+
+        $itemsToAnimate.each(function(){
+            var firstRect = firstRects.get(this);
+            var lastRect = this.getBoundingClientRect();
+            var deltaX = firstRect.left - lastRect.left;
+            var deltaY = firstRect.top - lastRect.top;
+            if (deltaX !== 0 || deltaY !== 0) {
+                 $(this).css({
+                    transform: `translate(${deltaX}px, ${deltaY}px)`
+                 });
+            }
+        });
+
+        setTimeout(function(){
+            $itemsToAnimate.each(function(){
+                var $this = $(this);
+                if ($this.css('transform') !== 'none') {
+                    $this.css({
+                        transition: 'transform .18s ease',
+                        transform: 'translate(0, 0)'
+                    });
+                    $this.one('transitionend', function(){
+                        $this.css({ transform: '', transition: '' });
+                    });
+                } else {
+                    $this.css('transition', '');
+                }
+            });
+        }, 10);
+        
+      });
 });
   
