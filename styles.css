@@ -118,3 +118,5 @@ body{
   transform: none;
   font-weight:700;
 }
+
+#side-col{ width:var(--side-w); min-width:var(--side-w); }
