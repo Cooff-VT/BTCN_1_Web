@@ -149,5 +149,18 @@ $(function(){
        $('#pattern').val('');
   }
   initializeControls();
+
+  $('#addNew').on('click', function(){
+      idCounter++;
+      var $selected = $('#iconSelect option:selected');
+      var icon = $selected.text();
+      var label = $selected.val() || ('Item ' + idCounter);
+
+      var $new = $('<div class="grid-item"></div>')
+          .attr('data-id', idCounter)
+          .append('<div class="icon-box"><div class="icon">'+icon+'</div></div>')
+          .append('<div class="label">'+label+'</div>');
+      $grid.append($new); // Thêm vào cuối
+    });
 });
   
