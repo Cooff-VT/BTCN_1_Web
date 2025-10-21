@@ -260,6 +260,56 @@ body{
   box-shadow:0 18px 30px rgba(0,0,0,0.22);
 }
 
+#grid{
+  padding:12px 16px 20px 16px;
+  display:grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  background:linear-gradient(180deg,#f6fbff,#eef7ff);
+  border-top:1px solid #d7e6fb;
+  min-height:300px;
+  align-content:start;
+}
+.grid-item{
+  text-align:center;
+  cursor:grab;
+  user-select:none;
+  /* YÊU CẦU 16 & 17: Animation cho Grid Item */
+  transition: transform .18s ease, box-shadow .18s ease;
+  display:flex;
+  flex-direction:column;
+  gap: 8px;
+  align-items:center;
+  justify-content:center;
+}
+.icon-box {
+  background: linear-gradient(180deg,#2b66a3,#3b8bd2);
+  padding: 18px 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.grid-item .icon{
+  font-size: 44px;
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.2), transparent 40%);
+  width:70%;
+  padding:10px;
+  border-radius:8px;
+}
+.grid-item .label{
+  font-size: 16px;
+  color:#333;
+  margin-top: 0;
+}
+#grid, #drag-drop {
+  user-select: none;
+  caret-color: transparent;
+  outline: none;
+}
+#grid:focus, #drag-drop:focus { outline: none; caret-color: transparent; }
+
 @media(max-width:576px){
   #page-wrap{ margin:8px; }
   /* YÊU CẦU 1: Thay đổi bố cục main */
