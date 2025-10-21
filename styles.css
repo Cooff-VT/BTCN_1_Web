@@ -33,3 +33,22 @@ body{
   overflow: hidden;
 }
 
+/* HEADER (fixed visual height) */
+#site-header{
+  height:var(--header-h);
+  background: linear-gradient(180deg, var(--blue-2), var(--blue-1));
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:4px 4px 0 0;
+  box-shadow: inset 0 -6px rgba(0,0,0,0.06);
+}
+.header-inner{width:96%; display:flex; align-items:center; justify-content:center;}
+.brand .title{
+  font-family: 'Times New Roman', Times, serif;
+  font-size:28px;
+  letter-spacing:2px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+  color: #f8fbff;
+}
