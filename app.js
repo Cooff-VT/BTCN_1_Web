@@ -1,4 +1,7 @@
-function setNavActive(i){
+// app.js
+$(function(){
+  /* YÊU CẦU 3 & 4: NAV + FOOTER sync (hover & click) */
+  function setNavActive(i){
     $('#main-nav .nav-item, #site-footer .nav-item').removeClass('active');
     $('#main-nav .nav-item[data-i="'+i+'"], #site-footer .nav-item[data-i="'+i+'"]').addClass('active');
   }
@@ -6,13 +9,18 @@ function setNavActive(i){
     var i = $(this).data('i');
     setNavActive(i);
   });
+  /* --- Hết Yêu cầu 3 & 4 --- */
 
+  /* YÊU CẦU 8: NEWS collapse toggle (Đóng/mở) */
   var $newsList = $('#news-list');
   $newsList.on('click', '.news-toggle', function(e){
     var item = $(this).closest('.news-item');
     item.toggleClass('collapsed');
     $(this).text(item.hasClass('collapsed') ? '▶' : '↓');
   });
+  /* --- Hết Yêu cầu 8 --- */
+  
+  /* YÊU CẦU 9: NEWS reorder (Thay đổi thứ tự) */
   (function(){
     var dragging = null;
     var placeholder = $('<div class="news-placeholder"></div>');
@@ -50,47 +58,7 @@ function setNavActive(i){
       });
     });
   })();
+  /* --- Hết Yêu cầu 9 --- */
 
-
-  function applyHighlight(pattern, isRegex){
-    var currentText = $orig.text();
-
-    if(!pattern) {
-        $orig.html(escapeHtml(currentText));
-        applyHighlightStyles();
-        return;
-    };
-
-    var regex;
-    try{
-      regex = isRegex ? new RegExp(pattern, 'g') : new RegExp(pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
-    } catch(err) {
-      alert('Pattern không hợp lệ'); return;
-    }
-
-    if (currentText.match(regex)) {
-        var out = currentText.replace(regex, m => `%%HIGHLIGHT%%${m}%%END%%`);
-        out = escapeHtml(out).replace(/%%HIGHLIGHT%%/g, '<span class="highlighted">').replace(/%%END%%/g, '</span>');
-        $orig.html(out);
-    } else {
-        $orig.html(escapeHtml(currentText));
-    }
-
-    applyHighlightStyles();
-  }
-
-   var $newsList = $('#news-list');
-  $newsList.on('click', '.news-toggle', function(e){
-    var item = $(this).closest('.news-item');
-    item.toggleClass('collapsed');
-    $(this).text(item.hasClass('collapsed') ? '▶' : '↓');
-  });
-
-  setTimeout(function(){
-            $itemsToAnimate.each(function(){
-                var $this = $(this);
-                if ($this.css('transform') !== 'none') {
-                    $this.css({
-                        transition: 'transform .18s ease',
-                        transform: 'translate(0, 0)'
-                    });
+  
+  
