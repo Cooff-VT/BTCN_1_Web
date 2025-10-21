@@ -126,5 +126,28 @@ $(function(){
         $orig.text(newText);
     } catch(err){ alert('Pattern không hợp lệ'); }
   });
+
+  /* YÊU CẦU 13: Nút Reset */
+  $('#btnReset').on('click', function(){
+     $orig.html(initialHtmlContent); // Khôi phục text gốc
+     initializeControls(true); // Đặt lại các điều khiển
+  });
+
+  /* Hàm khởi tạo các nút điều khiển (Yêu cầu 6 & 10) */
+  function initializeControls(isReset = false) {
+      $('#textColor').val('#b30000');
+      $('#bgColor').val('#fff176');
+      $('#cbBold').prop('checked', false);
+      $('#cbItalic').prop('checked', false);
+      $('#cbUnderline').prop('checked', false);
+      applyHighlightStyles();
+      if (!isReset) {
+         $orig.html(initialHtmlContent);
+      } else {
+         applyHighlightStyles();
+      }
+       $('#pattern').val('');
+  }
+  initializeControls();
 });
   
