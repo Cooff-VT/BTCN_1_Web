@@ -271,3 +271,50 @@ body{
 .popover label:last-child {
   margin-bottom: 0;
 }
+
+/* CSS CHO DRAG & DROP SELECT */
+.select-wrapper {
+  position: relative;
+}
+#drag-drop .panel-group-center select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #fff;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  width: 75px;
+  padding: 6px 25px 6px 10px;
+  cursor: pointer;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 3px center;
+  background-size: 1em;
+}
+#drag-drop .panel-group-center select:focus {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 14l5-5 5 5z"/></svg>');
+  outline: none;
+  border-color: #999;
+  box-shadow: 0 0 3px #a3c5f0;
+}
+.select-divider {
+  position: absolute;
+  left: 38px;
+  top: 6px;
+  bottom: 6px;
+  border-left: 1px solid #ccc;
+  pointer-events: none;
+}
+
+
+/* text area */
+#text-area{ background:#fff; padding:16px; min-height:220px; border-top:1px solid #ddd; }
+#originalText{
+  font-size:18px;
+  line-height:1.9;
+  color:#111;
+  font-family: 'Times New Roman', Times, serif;
+}
+.highlighted{
+  padding:0 3px;
+  border-radius:3px;
+}
