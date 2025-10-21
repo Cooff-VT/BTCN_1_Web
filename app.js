@@ -78,3 +78,10 @@ function setNavActive(i){
 
     applyHighlightStyles();
   }
+
+   var $newsList = $('#news-list');
+  $newsList.on('click', '.news-toggle', function(e){
+    var item = $(this).closest('.news-item');
+    item.toggleClass('collapsed');
+    $(this).text(item.hasClass('collapsed') ? '▶' : '↓');
+  });
