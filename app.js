@@ -115,5 +115,16 @@ $(function(){
     }
     applyHighlightStyles();
   }
+
+  $('#btnDelete').on('click', function(){
+    var pattern = $('#pattern').val();
+    if(!pattern) return;
+    var currentText = $orig.text();
+    try{
+        var regex = new RegExp(pattern, 'g');
+        var newText = currentText.replace(regex, '');
+        $orig.text(newText);
+    } catch(err){ alert('Pattern không hợp lệ'); }
+  });
 });
   
