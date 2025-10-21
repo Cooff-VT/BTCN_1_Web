@@ -53,7 +53,13 @@ body{
   color: #f8fbff;
 }
 
-
+/* Buttons and Controls */
+.btn{background: linear-gradient(180deg,#7fa7e8,#4b7fc3); color:#fff; border: 1px solid #3a66a0; padding:6px 12px; border-radius:6px; cursor:pointer; box-shadow: 0 2px 0 rgba(0,0,0,0.12);}
+#btnSample{
+  border: 1px solid #ccc;
+  min-width: 100px;
+  text-align: center;
+}
 
 /* NAV */
 #main-nav{
@@ -157,3 +163,111 @@ body{
   font-weight: 700;
 }
 .news-placeholder{ height:56px; border-radius:6px; border:2px dashed #e6e6e6; background:#fbfbfb; margin-bottom:8px; }
+
+/* CONTENT column */
+#content-col{ flex:1; min-width:0; }
+
+/* panel */
+.panel{ border-radius:6px; overflow:hidden; margin-bottom:12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border:1px solid #dcdcdc; background: linear-gradient(180deg,#f8fbff,#fbfdff); }
+
+/* --- THAY ĐỔI Ở ĐÂY --- */
+#process-text {
+  overflow: visible;
+  position: relative; /* Thêm dòng này để tạo stacking context */
+  z-index: 2;         /* Thêm dòng này để nâng panel này lên trên */
+}
+/* --- HẾT THAY ĐỔI --- */
+
+.panel-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background: linear-gradient(90deg,#a3c5f0,#dfefff);
+  padding:8px 12px;
+}
+.panel-group-left, .panel-group-center, .panel-group-right { display: flex; align-items: center; gap: 8px; }
+.panel-group-center { flex-grow: 1; justify-content: center; }
+.panel-title{
+  font-weight:900;
+  color: #fff;
+  font-size: 1.2em;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+.panel-controls input[type="text"]{ padding:6px; border-radius:4px; border:1px solid #bbb; }
+
+/* Kiểu chung cho input[type=color] */
+.panel-head input[type="color"],
+.popover input[type="color"] {
+  width: 50px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid #888;
+  border-radius: 4px;
+  cursor: pointer;
+  background: #eaf6ff;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.panel-head input[type="color"]::-webkit-color-swatch,
+.popover input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 3px;
+}
+.panel-head input[type="color"]::-moz-color-swatch,
+.popover input[type="color"]::-moz-color-swatch {
+  border: none;
+  border-radius: 3px;
+}
+
+.btn-icon { padding: 4px 8px; font-size: 16px; line-height: 1; }
+.settings-container { position: relative; }
+
+.popover {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 8px;
+
+  background: #eaf6ff;
+  border: 1px solid #9fbadf;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 12px;
+  z-index: 100;
+
+  width: auto;
+  white-space: nowrap;
+}
+.popover::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-bottom-color: #9fbadf;
+}
+.popover::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-bottom-color: #eaf6ff;
+  margin-bottom: -1px;
+}
+.popover label {
+  display: block;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+}
+.popover label:last-child {
+  margin-bottom: 0;
+}
