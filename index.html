@@ -53,12 +53,33 @@
           <div class="panel-head">
             <div class="panel-group-left">
               <div class="panel-title">Process Text</div>
-            
+            </div>
+            <div class="panel-group-center">
+              <input id="pattern" placeholder="Enter text here" />
+              <button class="btn" id="btnHighlight">Highlight</button>
+              <button class="btn" id="btnDelete">Delete</button>
+              <button class="btn" id="btnReset">Reset</button>
+            </div>
+            <div class="panel-group-right">
+              <button class="btn" id="btnSample">SampleText</button>
+              <input type="color" id="textColor" />
+              <div class="settings-container">
+                <button id="btnSettings" class="btn btn-icon">⚙️</button>
+                <div id="settingsPopover" class="popover">
+                  <label><input type="checkbox" id="cbBold" /> Bold</label>
+                  <label><input type="checkbox" id="cbItalic" /> Italic</label>
+                  <label><input type="checkbox" id="cbUnderline" /> Underline</label>
+                  <label><input type="color" id="bgColor" /> Background</label>
+                </div>
+              </div>
+            </div>
           </div>
-          
+          <div id="text-area">
+            <div id="originalText" data-original>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa ratione dolorum, sunt deleniti laborum asperiores molestias! Provident cumque amet, quod cupiditate, ut animi sequi voluptate numquam, possimus quo quisquam minima. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora distinctio, expedita nostrum natus culpa ipsa veritatis labore incidunt, beatae quibusdam maiores dolorum. Quaerat provident pariatur aliquam earum excepturi ratione fugit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem odit doloribus rem. Tempora ullam id porro, exercitationem fuga nihil minus eveniet. Cum neque, eveniet hic repellat doloremque sapiente a nihil. Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, vel, nulla distinctio numquam quae praesentium optio velit quo sapiente quidem cumque iure ex aperiam debitis error fuga voluptates. Maiores, sapiente?
+            </div>
           </div>
         </section>
-        
         <section id="drag-drop" class="panel">
           <div class="panel-head">
             <div class="panel-group-left">
