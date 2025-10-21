@@ -151,3 +151,97 @@ body{
 }
 /* Hết sửa lỗi */
 
+.panel-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background: linear-gradient(90deg,#a3c5f0,#dfefff);
+  padding:8px 12px;
+}
+.panel-group-left, .panel-group-center, .panel-group-right { display: flex; align-items: center; gap: 8px; }
+.panel-group-center { flex-grow: 1; justify-content: center; }
+.panel-title{
+  font-weight:900;
+  color: #fff;
+  font-size: 1.2em;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+.panel-controls input[type="text"]{ padding:6px; border-radius:4px; border:1px solid #bbb; }
+
+/* YÊU CẦU 10: Định dạng Popover & Controls */
+.panel-head input[type="color"],
+.popover input[type="color"] {
+  width: 50px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid #888;
+  border-radius: 4px;
+  cursor: pointer;
+  background: #eaf6ff;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.panel-head input[type="color"]::-webkit-color-swatch,
+.popover input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 3px;
+}
+.panel-head input[type="color"]::-moz-color-swatch,
+.popover input[type="color"]::-moz-color-swatch {
+  border: none;
+  border-radius: 3px;
+}
+
+.btn-icon { padding: 4px 8px; font-size: 16px; line-height: 1; }
+.settings-container { position: relative; }
+
+.popover {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 8px;
+
+  background: #eaf6ff;
+  border: 1px solid #9fbadf;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 12px;
+  z-index: 100;
+
+  width: auto;
+  white-space: nowrap;
+}
+.popover::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-bottom-color: #9fbadf;
+}
+.popover::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-bottom-color: #eaf6ff;
+  margin-bottom: -1px;
+}
+.popover label {
+  display: block;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+}
+.popover label:last-child {
+  margin-bottom: 0;
+}
+
