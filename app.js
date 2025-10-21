@@ -85,3 +85,12 @@ function setNavActive(i){
     item.toggleClass('collapsed');
     $(this).text(item.hasClass('collapsed') ? '▶' : '↓');
   });
+
+  setTimeout(function(){
+            $itemsToAnimate.each(function(){
+                var $this = $(this);
+                if ($this.css('transform') !== 'none') {
+                    $this.css({
+                        transition: 'transform .18s ease',
+                        transform: 'translate(0, 0)'
+                    });
