@@ -120,3 +120,40 @@ body{
 }
 
 #side-col{ width:var(--side-w); min-width:var(--side-w); }
+/* THAY ĐỔI Ở ĐÂY: Chỉnh padding của side-box */
+.side-box{
+  background:var(--muted);
+  padding: 0 8px 8px 8px; /* Bỏ padding top */
+  border-radius:6px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.06);
+  overflow:visible;
+}
+/* --- HẾT THAY ĐỔI --- */
+#news-list{ display:flex; flex-direction:column; gap:8px; }
+.news-item{
+  background: #fff;
+  border-radius:0px;
+  overflow:hidden;
+  border-left:4px solid #f2b24a;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+.news-title{ background: #e6810e; padding:8px 10px; font-weight:900; color:#fff;display:flex; justify-content:space-between; align-items:center; user-select:none;}
+.news-toggle, .news-drag {
+    cursor: pointer;
+}
+.news-body{
+  padding:8px 10px;
+  font-size: 14px;
+  color: #4a68ad;
+  line-height: 1.4;
+  font-family: 'Times New Roman', Times, serif;
+}
+.news-item.collapsed .news-body{
+  display:none;
+}
+.news-item.collapsed .news-title {
+  background: #ffdca8;
+  color: #6a5f5f;
+  font-weight: 700;
+}
+.news-placeholder{ height:56px; border-radius:6px; border:2px dashed #e6e6e6; background:#fbfbfb; margin-bottom:8px; }
