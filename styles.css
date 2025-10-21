@@ -52,3 +52,15 @@ body{
   text-shadow: 0 1px 0 rgba(255,255,255,0.3);
   color: #f8fbff;
 }
+
+* NAV */
+#main-nav{
+  background: #fff;
+  padding: 8px 12px;
+  display: table;
+  margin: -15px auto 12px auto;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  position: relative;
+  z-index: 10;
+  border-radius: 8px;
+}
