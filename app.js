@@ -92,5 +92,28 @@ $(function(){
     // Áp dụng style cho nút SampleText (Yêu cầu 10)
     $('#btnSample').css(styles);
   }
+
+  function applyHighlight(pattern, isRegex){
+    var currentText = $orig.text();
+    if(!pattern) {
+        $orig.html(escapeHtml(currentText)); 
+        applyHighlightStyles();
+        return;
+    };
+    var regex;
+    try{
+      regex = isRegex ? new RegExp(pattern, 'g') : new RegExp(pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+    } catch(err) {
+      alert('Pattern không hợp lệ'); return;
+    }
+    if (currentText.match(regex)) {
+        var out = currentText.replace(regex, m => `%%HIGHLIGHT%%${m}%%END%%`);
+        out = escapeHtml(out).replace(/%%HIGHLIGHT%%/g, '<span class="highlighted">').replace(/%%END%%/g, '</span>');
+        $orig.html(out);
+    } else {
+        $orig.html(escapeHtml(currentText));
+    }
+    applyHighlightStyles();
+  }
 });
   
