@@ -1,6 +1,4 @@
-// app.js
 $(function(){
-  /* YÊU CẦU 3 & 4: NAV + FOOTER sync (hover & click) */
   function setNavActive(i){
     $('#main-nav .nav-item, #site-footer .nav-item').removeClass('active');
     $('#main-nav .nav-item[data-i="'+i+'"], #site-footer .nav-item[data-i="'+i+'"]').addClass('active');
@@ -9,18 +7,13 @@ $(function(){
     var i = $(this).data('i');
     setNavActive(i);
   });
-  /* --- Hết Yêu cầu 3 & 4 --- */
 
-  /* YÊU CẦU 8: NEWS collapse toggle (Đóng/mở) */
   var $newsList = $('#news-list');
   $newsList.on('click', '.news-toggle', function(e){
     var item = $(this).closest('.news-item');
     item.toggleClass('collapsed');
     $(this).text(item.hasClass('collapsed') ? '▶' : '↓');
   });
-  /* --- Hết Yêu cầu 8 --- */
-  
-  /* YÊU CẦU 9: NEWS reorder (Thay đổi thứ tự) */
   (function(){
     var dragging = null;
     var placeholder = $('<div class="news-placeholder"></div>');
@@ -58,9 +51,12 @@ $(function(){
       });
     });
   })();
-  /* --- Hết Yêu cầu 9 --- */
 
-  /* YÊU CẦU 10: Logic Popover */
+  var $orig = $('#originalText');
+  const initialHtmlContent = $orig.html();
+
+  function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
   $('#btnSettings').on('click', function(e) {
     e.stopPropagation();
     $('#settingsPopover').toggle();
@@ -71,7 +67,35 @@ $(function(){
     }
   });
 
-   /* YÊU CẦU 10: Hàm áp dụng Style (cho cả SampleText & Highlight) */
+
+  function applyHighlight(pattern, isRegex){
+    var currentText = $orig.text();
+
+    if(!pattern) {
+        $orig.html(escapeHtml(currentText));
+        applyHighlightStyles();
+        return;
+    };
+
+    var regex;
+    try{
+      regex = isRegex ? new RegExp(pattern, 'g') : new RegExp(pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+    } catch(err) {
+      alert('Pattern không hợp lệ'); return;
+    }
+
+    if (currentText.match(regex)) {
+        var out = currentText.replace(regex, m => `%%HIGHLIGHT%%${m}%%END%%`);
+        out = escapeHtml(out).replace(/%%HIGHLIGHT%%/g, '<span class="highlighted">').replace(/%%END%%/g, '</span>');
+        $orig.html(out);
+    } else {
+        $orig.html(escapeHtml(currentText));
+    }
+
+    applyHighlightStyles();
+  }
+
+
   function applyHighlightStyles(){
     var textColor = $('#textColor').val();
     var bgColor = $('#bgColor').val();
@@ -86,35 +110,14 @@ $(function(){
       fontStyle: isItalic ? 'italic' : 'normal',
       textDecoration: isUnderline ? 'underline' : 'none'
     };
-    
-    // Áp dụng style cho text đã highlight (Yêu cầu 11)
+
     $orig.find('.highlighted').css(styles);
-    // Áp dụng style cho nút SampleText (Yêu cầu 10)
     $('#btnSample').css(styles);
   }
 
-  function applyHighlight(pattern, isRegex){
-    var currentText = $orig.text();
-    if(!pattern) {
-        $orig.html(escapeHtml(currentText)); 
-        applyHighlightStyles();
-        return;
-    };
-    var regex;
-    try{
-      regex = isRegex ? new RegExp(pattern, 'g') : new RegExp(pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
-    } catch(err) {
-      alert('Pattern không hợp lệ'); return;
-    }
-    if (currentText.match(regex)) {
-        var out = currentText.replace(regex, m => `%%HIGHLIGHT%%${m}%%END%%`);
-        out = escapeHtml(out).replace(/%%HIGHLIGHT%%/g, '<span class="highlighted">').replace(/%%END%%/g, '</span>');
-        $orig.html(out);
-    } else {
-        $orig.html(escapeHtml(currentText));
-    }
-    applyHighlightStyles();
-  }
+  $('#btnHighlight').on('click', function(){
+    applyHighlight($('#pattern').val(), true);
+  });
 
   $('#btnDelete').on('click', function(){
     var pattern = $('#pattern').val();
@@ -124,23 +127,32 @@ $(function(){
         var regex = new RegExp(pattern, 'g');
         var newText = currentText.replace(regex, '');
         $orig.text(newText);
+
     } catch(err){ alert('Pattern không hợp lệ'); }
   });
 
-  /* YÊU CẦU 13: Nút Reset */
   $('#btnReset').on('click', function(){
-     $orig.html(initialHtmlContent); // Khôi phục text gốc
-     initializeControls(true); // Đặt lại các điều khiển
+     $orig.html(initialHtmlContent);
+     initializeControls(true);
   });
 
-  /* Hàm khởi tạo các nút điều khiển (Yêu cầu 6 & 10) */
+
+  $('#settingsPopover input, #textColor').on('change input', function() {
+     applyHighlightStyles();
+     if ($orig.find('.highlighted').length > 0) {
+         applyHighlight($('#pattern').val(), true);
+     }
+  });
+
   function initializeControls(isReset = false) {
       $('#textColor').val('#b30000');
       $('#bgColor').val('#fff176');
       $('#cbBold').prop('checked', false);
       $('#cbItalic').prop('checked', false);
       $('#cbUnderline').prop('checked', false);
+
       applyHighlightStyles();
+
       if (!isReset) {
          $orig.html(initialHtmlContent);
       } else {
@@ -150,36 +162,22 @@ $(function(){
   }
   initializeControls();
 
-  $('#addNew').on('click', function(){
-      idCounter++;
-      var $selected = $('#iconSelect option:selected');
-      var icon = $selected.text();
-      var label = $selected.val() || ('Item ' + idCounter);
 
-      var $new = $('<div class="grid-item"></div>')
-          .attr('data-id', idCounter)
-          .append('<div class="icon-box"><div class="icon">'+icon+'</div></div>')
-          .append('<div class="label">'+label+'</div>');
-      $grid.append($new); // Thêm vào cuối
-    });
+  (function(){
+    var $grid = $('#grid');
+    var dragging = null;
+    var idCounter = 0;
 
-    $(document).on('mouseup.gr', function(ev){
-        if (!dragging) return;
-        $(document).off('.gr');
-        dragging.$clone.remove();
-        
-        $grid.children('.grid-item').css({
-            transform: '',
-            transition: ''
-        });
-
-        // Thả item vào vị trí placeholder
-        dragging.$placeholder.replaceWith(dragging.$item);
-        dragging.$item.show();
-        dragging = null;
-      });
-
+    $grid.on('mousedown', '.grid-item', function(e){
+      e.preventDefault();
+      var $item = $(this);
+      dragging = { $item: $item };
+      var off = $item.offset();
+      dragging.$clone = $item.clone().addClass('dragging-clone').css({ left: off.left, top: off.top, width: $item.outerWidth() }).appendTo('body');
+      dragging.$placeholder = $('<div class="grid-placeholder"></div>');
       
+      dragging.$placeholder.insertAfter($item);
+      $item.hide();
 
       $(document).on('mousemove.gr', function(ev){
         if (!dragging) return;
@@ -209,7 +207,6 @@ $(function(){
             return; 
         }
 
-        // Bắt đầu FLIP
         var $itemsToAnimate = $grid.children('.grid-item').not($item);
         var firstRects = new Map();
         $itemsToAnimate.each(function(){
@@ -217,6 +214,7 @@ $(function(){
         });
 
         $itemsToAnimate.css('transition', 'none'); 
+
         if (newInsertionTarget) {
             dragging.$placeholder.insertBefore(newInsertionTarget);
         } else {
@@ -226,8 +224,10 @@ $(function(){
         $itemsToAnimate.each(function(){
             var firstRect = firstRects.get(this);
             var lastRect = this.getBoundingClientRect();
+
             var deltaX = firstRect.left - lastRect.left;
             var deltaY = firstRect.top - lastRect.top;
+
             if (deltaX !== 0 || deltaY !== 0) {
                  $(this).css({
                     transform: `translate(${deltaX}px, ${deltaY}px)`
@@ -243,6 +243,7 @@ $(function(){
                         transition: 'transform .18s ease',
                         transform: 'translate(0, 0)'
                     });
+                    
                     $this.one('transitionend', function(){
                         $this.css({ transform: '', transition: '' });
                     });
@@ -253,6 +254,55 @@ $(function(){
         }, 10);
         
       });
-      
+
+      $(document).on('mouseup.gr', function(ev){
+        if (!dragging) return;
+        $(document).off('.gr');
+        dragging.$clone.remove();
+        
+        $grid.children('.grid-item').css({
+            transform: '',
+            transition: ''
+        });
+
+        dragging.$placeholder.replaceWith(dragging.$item);
+        dragging.$item.show();
+        dragging = null;
+      });
+    });
+
+    $('#addNew').on('click', function(){
+      idCounter++;
+      var $selected = $('#iconSelect option:selected');
+      var icon = $selected.text();
+      var label = $selected.val() || ('Item ' + idCounter);
+
+      var $new = $('<div class="grid-item"></div>')
+          .attr('data-id', idCounter)
+          .append('<div class="icon-box"><div class="icon">'+icon+'</div></div>')
+          .append('<div class="label">'+label+'</div>');
+      $grid.append($new);
+    });
+  })();
+
+  $(document).on('selectstart', function(e){ if($('.dragging-clone').length) return false; });
+
+  $('#page-wrap').on('click', function(e) {
+    if ($(e.target).closest('button, a, input, select, .news-toggle, .news-drag, .grid-item, label, .popover').length) {
+       return;
+    }
+    var $ripple = $('<span class="click-ripple"></span>');
+    $(this).append($ripple);
+    var maxSize = Math.max($ripple.width(), $ripple.height());
+    var x = e.pageX - $(this).offset().left - maxSize / 2;
+    var y = e.pageY - $(this).offset().top - maxSize / 2;
+    $ripple.css({
+      left: x + 'px',
+      top: y + 'px'
+    }).addClass('animate');
+    setTimeout(function() {
+      $ripple.remove();
+    }, 600);
+  });
+
 });
-  
