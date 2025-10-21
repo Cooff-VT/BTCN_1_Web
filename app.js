@@ -179,6 +179,8 @@ $(function(){
         dragging = null;
       });
 
+      
+
       $(document).on('mousemove.gr', function(ev){
         if (!dragging) return;
         var $item = dragging.$item;
@@ -251,5 +253,6 @@ $(function(){
         }, 10);
         
       });
+      
 });
   

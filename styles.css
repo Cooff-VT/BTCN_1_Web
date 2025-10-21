@@ -245,3 +245,18 @@ body{
   margin-bottom: 0;
 }
 
+@media(max-width:576px){
+  #page-wrap{ margin:8px; }
+  /* YÊU CẦU 1: Thay đổi bố cục main */
+  #main-area{ flex-direction:column; }
+  #side-col{ width:100%; order:2; }
+  #content-col{ order:1; }
+  /* YÊU CẦU 7: Thay đổi bố cục Grid */
+  #grid{ grid-template-columns: repeat(2,1fr); }
+  .panel-head { flex-wrap: wrap; }
+  .footer-inner {
+    flex-direction: column;
+    gap: 5px;
+    width: 94%;
+  }
+}
