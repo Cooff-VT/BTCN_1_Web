@@ -53,7 +53,9 @@ body{
   color: #f8fbff;
 }
 
-* NAV */
+
+
+/* NAV */
 #main-nav{
   background: #fff;
   padding: 8px 12px;
@@ -63,4 +65,26 @@ body{
   position: relative;
   z-index: 10;
   border-radius: 8px;
+}
+#main-nav ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:flex;
+  gap: 40px;
+}
+#main-nav .nav-item{
+  background: transparent;
+  padding:6px 10px;
+  border-radius:10px;
+  color: var(--tool-blue);
+  cursor:pointer;
+  font-weight:600;
+  transition: all .16s ease;
+}
+#main-nav .nav-item:hover, #main-nav .nav-item.active{
+  background: linear-gradient(180deg,#fff,#eaf6ff);
+  color: var(--accent);
+  font-weight: 700;
+  transform: none;
 }
