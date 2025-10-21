@@ -88,3 +88,14 @@ body{
   font-weight: 700;
   transform: none;
 }
+
+
+/* FOOTER */
+#site-footer{ height:var(--footer-h); background: linear-gradient(180deg,#ffdca8,#f6b26b); display:flex; align-items:center; justify-content:center; border-radius:0 0 4px 4px; margin-top:8px; border-top:1px solid rgba(0,0,0,0.04); }
+.footer-inner{
+  width:auto;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  gap: 40px;
+}
