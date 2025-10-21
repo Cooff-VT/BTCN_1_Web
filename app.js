@@ -162,5 +162,21 @@ $(function(){
           .append('<div class="label">'+label+'</div>');
       $grid.append($new); // Thêm vào cuối
     });
+
+    $(document).on('mouseup.gr', function(ev){
+        if (!dragging) return;
+        $(document).off('.gr');
+        dragging.$clone.remove();
+        
+        $grid.children('.grid-item').css({
+            transform: '',
+            transition: ''
+        });
+
+        // Thả item vào vị trí placeholder
+        dragging.$placeholder.replaceWith(dragging.$item);
+        dragging.$item.show();
+        dragging = null;
+      });
 });
   
