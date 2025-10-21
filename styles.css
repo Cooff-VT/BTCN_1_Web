@@ -1,0 +1,35 @@
+/* Root palette approximating the provided image */
+:root{
+  --max-w: 1280px;
+  --header-h: 66px;
+  --footer-h: 33px;
+  --side-w: 256px;
+
+  --blue-1: #5b9be2;
+  --blue-2: #a6caf0;
+  --tool-blue: #4b7fc3;
+  --accent: #FF7707;
+  --muted: #fff7ef;
+  --panel-bg: #ffffff;
+  --shadow: rgba(0,0,0,0.14);
+}
+
+/* page centered */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: 'Times New Roman', Times, serif;
+  background: #f2f5fb;
+  display:flex;
+  justify-content:center;
+}
+#page-wrap{
+  width:100%;
+  max-width:var(--max-w);
+  background:white;
+  margin:12px;
+  box-shadow: 0 6px 18px var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
